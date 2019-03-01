@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin-top: 10vh;
+            background-color: #fff;
+            /* font-family:  */
+        }
+
+        .card {
+            margin-bottom: 10px;
+        }
+
+        .card-block {
+            padding: 10px 15px;
+        }
+        
+        #weightType {
+            width: auto;
+            height: auto;
+            box-sizing: border-box;
+            padding: 2px 0px 2px 6px;
+            
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="display-4 text-center mb-4"> 
+                    Weight Converter
+                </h1>
+                <form>
+                    <div class="form-group">
+                        <input 
+                        id="weightInput"
+                        type="number" 
+                        class="form-control-lg form-control" 
+                        placeholder="enter kilograms...">
+                        <span class="text-dark">Change weight unit: </span>
+                        <select name="Units" id="weightType" class="mt-3">
+                            <option value="Kilograms" id="kilograms">Kilograms</option>
+                            <option value="Grams" id="grams">Grams</option>
+                            <option value="Pounds" id="lbs">Pounds/lbs</option>
+                            <option value="Ounces" id="oz">Ounces/oz</option>
+                        </select>
+                    </div>
+                </form>
+                    <div id="output">
+
+                        <div class="card bg-info text-white">
+                            <div class="card-block">
+                                <h4>Grams:</h4>
+                                <div id="gramsOutput"></div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                                <div class="card-block bg-warning text-white">
+                                    <h4>Pounds:</h4>
+                                    <div id="lbsOutput"></div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                                <div class="card-block bg-danger text-white">
+                                    <h4>Ounces:</h4>
+                                    <div id="ozOutput"></div>
+                                </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-block bg-success text-white">
+                                <h4>Kilograms:</h4>
+                                <div id="kgOutput"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    
+</body>
+
+
+<script src="script.js"></script>
+
+</html>
