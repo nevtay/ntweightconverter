@@ -2,6 +2,8 @@
 document.getElementById('output').style.visibility = 'hidden';
 
 //DECLARE VARIABLES
+// body
+const body = document.querySelector("body");
 //weight input
 const input = document.querySelector("#weightInput");
 // conversion output
@@ -94,7 +96,7 @@ weightType.addEventListener('change', changePlaceholder);
 // conversions
 weightType.addEventListener('change', calculateTwo);
 // conversions for touch devices
-weightType.addEventListener('touchend', calculateTwo);
+body.addEventListener('touchend', calculateTwo);
 // show weight output
 input.addEventListener('input', calculateTwo);
 
