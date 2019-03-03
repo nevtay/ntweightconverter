@@ -93,6 +93,8 @@ const calculateTwo = () => {
 weightType.addEventListener('change', changePlaceholder);
 // conversions
 weightType.addEventListener('change', calculateTwo);
+// conversions for touch devices
+weightType.addEventListener('touchend', calculateTwo);
 // show weight output
 input.addEventListener('input', calculateTwo);
 
