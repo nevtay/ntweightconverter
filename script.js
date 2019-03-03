@@ -92,7 +92,7 @@ const calculateTwo = () => {
 // change placeholder text
 weightType.addEventListener('change', changePlaceholder);
 // conversions
-weightType.addEventListener('click', calculateTwo);
+weightType.addEventListener('change', calculateTwo);
 // show weight output
 input.addEventListener('input', calculateTwo);
 
