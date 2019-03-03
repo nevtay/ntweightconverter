@@ -96,7 +96,7 @@ weightType.addEventListener('change', changePlaceholder);
 // conversions
 weightType.addEventListener('change', calculateTwo);
 // conversions for touch devices
-body.addEventListener('touchend', calculateTwo);
+body.addEventListener('touchstart', calculateTwo);
 // show weight output
 input.addEventListener('input', calculateTwo);
 
