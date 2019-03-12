@@ -47,7 +47,6 @@ function changePlaceholder() {
 }
 
 const conversionsOutput = () => {
-  let weight = inputEl.value;
   toggleOutputDisplay();
   switch (weightTypeEl.value) {
     case `kilograms`:
