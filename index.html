@@ -16,33 +16,29 @@
 
     <div class="container">
 
-
         <h1 class="heading-text">
             Weight Converter
         </h1>
 
-
         <form>
             <div class="input-group">
-                <input id="weightInput" type="number" class="weight-input" placeholder="enter kilograms...">
+                <input id="weightInput" type="number" class="weight-input" placeholder="enter kilograms">
                 <br>
-                <span class="unit-selector-text">Change weight unit: </span>
+                <span class="unit-selector-text">Current weight unit: </span>
                 <select name="Units" id="weightType" class="unit-selector">
-                    <option value="Kilograms" id="kilograms">Kilograms</option>
-                    <option value="Grams" id="grams">Grams</option>
-                    <option value="Pounds" id="lbs">Pounds/lbs</option>
-                    <option value="Ounces" id="oz">Ounces/oz</option>
+                    <option value="kilograms" id="kilograms">Kilograms</option>
+                    <option value="grams" id="grams">Grams</option>
+                    <option value="pounds" id="lbs">Pounds/lbs</option>
+                    <option value="ounces" id="oz">Ounces/oz</option>
                 </select>
             </div>
         </form>
-
 
         <div class="output">
             <div class="card card-output-grams">
                 <h4>Grams:</h4>
                 <div class="card-output" id="gramsOutput"></div>
             </div>
-
 
             <div class="card card-output-lbs">
                 <h4>Pounds:</h4>
