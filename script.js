@@ -1,70 +1,83 @@
-const inputEl = document.querySelector('#weightInput');
-const outputEl = document.querySelector('.output');
-const unitSelectorEl = document.querySelector('.unit-selector');
-const placeholderEl = inputEl.placeholder;
-const outputValues = document.querySelectorAll('.card-output');
-const weightTypeEl = document.querySelector('#weightType');
-const gramsOutputEl = document.querySelector('#gramsOutput');
-const lbsOutputEl = document.querySelector('#lbsOutput');
-const ozOutputEl = document.querySelector('#ozOutput');
-const kgOutputEl = document.querySelector('#kgOutput');
-const kilogramsEl = document.querySelector('#kilograms');
-const gramsEl = document.querySelector('#grams');
-const poundsEl = document.querySelector('#lbs');
-const ouncesEl = document.querySelector('#oz');
+const inputEl = document.querySelector("#weightInput");
+const outputEl = document.querySelector(".output");
+const unitSelectorEl = document.querySelector(".unit-selector");
+const outputValues = document.querySelectorAll(".card-output");
+const weightTypeEl = document.querySelector("#weightType");
+const gramsOutputEl = document.querySelector("#gramsOutput");
+const lbsOutputEl = document.querySelector("#lbsOutput");
+const ozOutputEl = document.querySelector("#ozOutput");
+const kgOutputEl = document.querySelector("#kgOutput");
+const kilogramsEl = document.querySelector("#kilograms");
+const gramsEl = document.querySelector("#grams");
+const poundsEl = document.querySelector("#lbs");
+const ouncesEl = document.querySelector("#oz");
+const weightRatios = {
+                kg: {
+                    g: 1000,
+                    lbs: 2.20462,
+                    oz: 35.274
+                },
+                gram: {
+                    kg: 0.001,
+                    lbs: 0.0022046244,
+                    oz: 0.03527
+                },
+                pound: {
+                    g: 453.592,
+                    kg: 0.453592,
+                    oz: 16
+                },
+                oz: {
+                    g: 28.3495,
+                    kg: 0.0283495,
+                    lbs: 0.0625
+                }
+};
 
-function hideConversions() {
-    outputEl.style.visibility = 'hidden';
-}
-
-function showConversions() {
-    outputEl.style.visibility = 'visible';
+function toggleOutputDisplay() {
+  if (inputEl.value === "") {
+    outputEl.classList.add("hidden");
+  } else if (inputEl.value !== "") {
+    outputEl.classList.remove("hidden");
+  }
 }
 
 function changePlaceholder() {
-    inputEl.placeholder = `enter ${unitSelectorEl.value}`;
+  inputEl.placeholder = `enter ${unitSelectorEl.value}`;
 }
 
-const weightOutput = () => {
-      let weight = inputEl.value;
-        if (inputEl.value === "") {
-            hideConversions();
-          } else {
-            showConversions();
-            switch (weightTypeEl.value) {
-                    case `kilograms`:
-                        gramsOutputEl.innerHTML = `${inputEl.value}kg = ${(weight*1000)}g`; 
-                        lbsOutputEl.innerHTML = `${inputEl.value}kg = ${(weight*2.20462).toFixed(3)} lb/s`; 
-                        ozOutputEl.innerHTML = `${inputEl.value}kg = ${(weight*35.274).toFixed(3)} oz`; 
-                        kgOutputEl.innerHTML = ""; 
-                        break;
-                    case `grams`:
-                        gramsOutputEl.innerHTML = ""; 
-                        lbsOutputEl.innerHTML = `${inputEl.value}g = ${(weight*0.00220462).toFixed(3)} lb/s`;
-                        ozOutputEl.innerHTML = `${inputEl.value}g = ${(weight*0.035274).toFixed(3)} oz`;
-                        kgOutputEl.innerHTML = `${inputEl.value}g = ${(weight*0.001).toFixed(3)}kg`;
-                        break;
-                    case `pounds`:
-                        gramsOutputEl.innerHTML = `${inputEl.value} lb/s = ${(weight*453.592).toFixed(3)}g`; 
-                        lbsOutputEl.innerHTML = "";
-                        ozOutputEl.innerHTML = `${inputEl.value} lb/s = ${(weight*16).toFixed(3)} oz`;
-                        kgOutputEl.innerHTML = `${inputEl.value} lb/s = ${(weight*0.453592).toFixed(3)}kg`;
-                        break;
-                    case `ounces`:
-                        gramsOutputEl.innerHTML = `${inputEl.value} oz = ${(weight*28.3495).toFixed(3)}g`; 
-                        lbsOutputEl.innerHTML = `${inputEl.value} oz = ${(weight*0.0625).toFixed(3)} lb/s`;
-                        ozOutputEl.innerHTML = ``;
-                        kgOutputEl.innerHTML = `${inputEl.value} oz = ${(weight*0.0283495).toFixed(3)}kg`;
-                        break;
-                    }
-                }
-  }; 
+const conversionsOutput = () => {
+  let weight = inputEl.value;
+  toggleOutputDisplay();
+  switch (weightTypeEl.value) {
+    case `kilograms`:
+      gramsOutputEl.innerHTML = `${inputEl.value * weightRatios.kg.g}`;
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.kg.lbs;
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.kg.oz;
+      kgOutputEl.innerHTML = "";
+      break;
+    case `grams`:
+      gramsOutputEl.innerHTML = "";
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.gram.lbs;
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.gram.oz;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.gram.kg;
+      break;
+    case `pounds`:
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.pound.g;
+      lbsOutputEl.innerHTML = "";
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.pound.oz;
+      kgOutputEl.innerHTML = inputEl.value *weightRratios.pound.kg;
+      break;
+    case `ounces`:
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.oz.g;
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.oz.lbs;
+      ozOutputEl.innerHTML = ``;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.oz.kg;
+      break;
+  }
+};
 
-window.onload = hideConversions();
-unitSelectorEl.addEventListener('change', changePlaceholder);
-weightTypeEl.addEventListener('click', weightOutput);
-inputEl.addEventListener('input', weightOutput);
-
-
-
-
+window.onload = toggleOutputDisplay();
+unitSelectorEl.addEventListener("change", changePlaceholder);
+weightTypeEl.addEventListener("click", conversionsOutput);
+inputEl.addEventListener("input", conversionsOutput);
