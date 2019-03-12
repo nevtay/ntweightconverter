@@ -29,7 +29,7 @@ body {
 }
 
 .weight-input {
-  width: 35vw;
+  width: 28vw;
   height: 3rem;
   border-radius: 10rem;
   padding: 0.5rem 2rem;
@@ -89,4 +89,8 @@ h4,
 
 .card-output-kg {
   background-color: rgb(255, 122, 122);
+}
+
+.hidden {
+  display: none;
 }
