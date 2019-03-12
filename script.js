@@ -50,7 +50,7 @@ const conversionsOutput = () => {
   toggleOutputDisplay();
   switch (weightTypeEl.value) {
     case `kilograms`:
-      gramsOutputEl.innerHTML = `${inputEl.value * weightRatios.kg.g}`;
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.kg.g;
       lbsOutputEl.innerHTML = inputEl.value * weightRatios.kg.lbs;
       ozOutputEl.innerHTML = inputEl.value * weightRatios.kg.oz;
       kgOutputEl.innerHTML = "";
