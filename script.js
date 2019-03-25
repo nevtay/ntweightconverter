@@ -7,46 +7,42 @@ const gramsOutputEl = document.querySelector("#gramsOutput");
 const lbsOutputEl = document.querySelector("#lbsOutput");
 const ozOutputEl = document.querySelector("#ozOutput");
 const kgOutputEl = document.querySelector("#kgOutput");
-const kilogramsEl = document.querySelector("#kilograms");
-const gramsEl = document.querySelector("#grams");
-const poundsEl = document.querySelector("#lbs");
-const ouncesEl = document.querySelector("#oz");
 const weightRatios = {
-                kg: {
-                    g: 1000,
-                    lbs: 2.20462,
-                    oz: 35.274
-                },
-                gram: {
-                    kg: 0.001,
-                    lbs: 0.0022046244,
-                    oz: 0.03527
-                },
-                pound: {
-                    g: 453.592,
-                    kg: 0.453592,
-                    oz: 16
-                },
-                oz: {
-                    g: 28.3495,
-                    kg: 0.0283495,
-                    lbs: 0.0625
-                }
+  kg: {
+    g: 1000,
+    lbs: 2.20462,
+    oz: 35.274
+  },
+  gram: {
+    kg: 0.001,
+    lbs: 0.0022046244,
+    oz: 0.03527
+  },
+  pound: {
+    g: 453.592,
+    kg: 0.453592,
+    oz: 16
+  },
+  oz: {
+    g: 28.3495,
+    kg: 0.0283495,
+    lbs: 0.0625
+  }
 };
 
 function toggleOutputDisplay() {
-  if (inputEl.value === "") {
-    outputEl.classList.add("hidden");
-  } else if (inputEl.value !== "") {
+  if (inputEl.value !== "") {
     outputEl.classList.remove("hidden");
+    } else {
+        outputEl.classList.add("hidden");
+      }
   }
-}
 
 function changePlaceholder() {
   inputEl.placeholder = `enter ${unitSelectorEl.value}`;
 }
 
-const conversionsOutput = () => {
+function conversionsOutput() {
   toggleOutputDisplay();
   switch (weightTypeEl.value) {
     case `kilograms`:
@@ -65,7 +61,7 @@ const conversionsOutput = () => {
       gramsOutputEl.innerHTML = inputEl.value * weightRatios.pound.g;
       lbsOutputEl.innerHTML = "";
       ozOutputEl.innerHTML = inputEl.value * weightRatios.pound.oz;
-      kgOutputEl.innerHTML = inputEl.value *weightRratios.pound.kg;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.pound.kg;
       break;
     case `ounces`:
       gramsOutputEl.innerHTML = inputEl.value * weightRatios.oz.g;
@@ -74,9 +70,8 @@ const conversionsOutput = () => {
       kgOutputEl.innerHTML = inputEl.value * weightRatios.oz.kg;
       break;
   }
-};
+}
 
-window.onload = toggleOutputDisplay();
 unitSelectorEl.addEventListener("change", changePlaceholder);
 weightTypeEl.addEventListener("click", conversionsOutput);
 inputEl.addEventListener("input", conversionsOutput);
