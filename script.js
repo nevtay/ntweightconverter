@@ -1,200 +1,77 @@
-// output is hidden by default
-document.getElementById('output').style.visibility = 'hidden';
-
-//DECLARE VARIABLES
-// body
-const body = document.querySelector("body");
-//weight input
-const input = document.querySelector("#weightInput");
-// conversion output
-const output = document.querySelector("#output");
-// placeholder 
-const placeholder = input.placeholder;
-// select field
-const weightType = document.querySelector("#weightType")
-// output - grams 
-const gramsOutput = document.querySelector("#gramsOutput");
-// output - pounds
-const lbsOutput = document.querySelector("#lbsOutput");
-// output - ounces
-const ozOutput = document.querySelector("#ozOutput");
-// output - kilograms
-const kgOutput = document.querySelector("#kgOutput");
-// select field - kilograms
-const kilograms = document.querySelector("#kilograms");
-// select field - grams
-const grams = document.querySelector("#grams");
-// select field - lbs
-const pounds = document.querySelector("#lbs")
-// select field - oz
-const ounces = document.querySelector("#oz")
-
-// second version of function for swapping placeholder text
-const changePlaceholder = () => {
-    switch (weightType.value) {
-        case `Kilograms`:
-            input.placeholder = "enter kilograms...";
-            break;
-        case `Grams`:
-            input.placeholder = `enter grams...`;
-            break;
-        case `Pounds`:
-            input.placeholder = "enter lbs...";
-            break;
-        case `Ounces`:
-            input.placeholder = "enter oz...";
-            break;
-        default:
-            input.placeholder = "enter kg...";
-    }
+const inputEl = document.querySelector("#weightInput");
+const outputEl = document.querySelector(".output");
+const unitSelectorEl = document.querySelector(".unit-selector");
+const outputValues = document.querySelectorAll(".card-output");
+const weightTypeEl = document.querySelector("#weightType");
+const gramsOutputEl = document.querySelector("#gramsOutput");
+const lbsOutputEl = document.querySelector("#lbsOutput");
+const ozOutputEl = document.querySelector("#ozOutput");
+const kgOutputEl = document.querySelector("#kgOutput");
+const weightRatios = {
+  kg: {
+    g: 1000,
+    lbs: 2.20462,
+    oz: 35.274
+  },
+  gram: {
+    kg: 0.001,
+    lbs: 0.0022046244,
+    oz: 0.03527
+  },
+  pound: {
+    g: 453.592,
+    kg: 0.453592,
+    oz: 16
+  },
+  oz: {
+    g: 28.3495,
+    kg: 0.0283495,
+    lbs: 0.0625
+  }
 };
 
-// third version of conversion function - used switch for tidier code
-const calculateTwo = () => {
-      let weight = input.value;
-        if (input.value === "") {
-              output.style.visibility = 'hidden';
-          } else
-            switch (weightType.value) {
-                    case `Kilograms`:
-                        output.style.visibility = 'visible';
-                        gramsOutput.innerHTML = weight*1000; 
-                        lbsOutput.innerHTML = weight*2.20462;
-                        ozOutput.innerHTML = weight*35.274;
-                        kgOutput.innerHTML = weight*1;
-                        break;
-                    case `Grams`:
-                        output.style.visibility = 'visible';
-                        gramsOutput.innerHTML = weight*1; 
-                        lbsOutput.innerHTML = weight*0.00220462;
-                        ozOutput.innerHTML = weight*0.035274;
-                        kgOutput.innerHTML = weight*0.001;
-                        break;
-                    case `Pounds`:
-                        output.style.visibility = 'visible';
-                        gramsOutput.innerHTML = weight*453.592; 
-                        lbsOutput.innerHTML = weight*1;
-                        ozOutput.innerHTML = weight*16;
-                        kgOutput.innerHTML = weight*0.453592;
-                        break;
-                    case `Ounces`:
-                        output.style.visibility = 'visible';
-                        gramsOutput.innerHTML = weight*28.3495; 
-                        lbsOutput.innerHTML = weight*0.0625;
-                        ozOutput.innerHTML =  weight*1;
-                        kgOutput.innerHTML = weight*0.0283495;
-                        break;
-                    default:
-                        return;
-                    }
-  };
-// 
+function toggleOutputDisplay() {
+  if (inputEl.value !== "") {
+    outputEl.classList.remove("hidden");
+    } else {
+        outputEl.classList.add("hidden");
+      }
+  }
 
-// EVENT LISTENERS \\
-// change placeholder text
-weightType.addEventListener('change', changePlaceholder);
-// conversions
-weightType.addEventListener('change', calculateTwo);
-// conversions for touch devices
-body.addEventListener('touchstart', calculateTwo);
-// show weight output
-input.addEventListener('input', calculateTwo);
+function changePlaceholder() {
+  inputEl.placeholder = `enter ${unitSelectorEl.value}`;
+}
 
+function conversionsOutput() {
+  toggleOutputDisplay();
+  switch (weightTypeEl.value) {
+    case `kilograms`:
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.kg.g;
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.kg.lbs;
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.kg.oz;
+      kgOutputEl.innerHTML = "";
+      break;
+    case `grams`:
+      gramsOutputEl.innerHTML = "";
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.gram.lbs;
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.gram.oz;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.gram.kg;
+      break;
+    case `pounds`:
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.pound.g;
+      lbsOutputEl.innerHTML = "";
+      ozOutputEl.innerHTML = inputEl.value * weightRatios.pound.oz;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.pound.kg;
+      break;
+    case `ounces`:
+      gramsOutputEl.innerHTML = inputEl.value * weightRatios.oz.g;
+      lbsOutputEl.innerHTML = inputEl.value * weightRatios.oz.lbs;
+      ozOutputEl.innerHTML = ``;
+      kgOutputEl.innerHTML = inputEl.value * weightRatios.oz.kg;
+      break;
+  }
+}
 
-
-
-
-// OLD CODE \\
-
-// first version swapping placeholder function
-// const changePlaceholder = () => {
-//     if (weightType.value === "Kilograms") {
-//      input.placeholder = "enter kilograms..."
-//     } else 
-//         if (weightType.value === "Grams") {
-//             input.placeholder = "enter grams..."
-//         } else 
-//             if (weightType.value === "Pounds") {
-//                 input.placeholder = "enter lbs..."
-//             } else 
-//                 if (weightType.value === "Ounces") {
-//                     input.placeholder = "enter oz..."
-//     }
-// };
-
-
-// first version of conversion function  - declaring weight variable as "e.target.value" causes output to display NaN when weight unit changes.
-// const calculate = (e) => {
-//     let weight = e.target.value;
-//     if (input.value === "") {
-//         output.style.visibility = 'hidden';
-//     } else 
-//         if (weightType.value === "Kilograms") {
-//             output.style.visibility = 'visible';
-//             gramsOutput.innerHTML = weight*1000; 
-//             lbsOutput.innerHTML = weight*2.20462;
-//             ozOutput.innerHTML = weight*35.274;
-//             kgOutput.innerHTML = " ";
-//             event.stopPropagation();
-//             } else 
-//                 if (weightType.value === "Grams") {
-//                     output.style.visibility = 'visible';
-//                     gramsOutput.innerHTML = " "; 
-//                     lbsOutput.innerHTML = weight*0.00220462;
-//                     ozOutput.innerHTML = weight*0.035274;
-//                     kgOutput.innerHTML = weight*0.001;
-//                     event.stopPropagation(); 
-//                     } else 
-//                         if (weightType.value === "Pounds") {
-//                             output.style.visibility = 'visible';
-//                             gramsOutput.innerHTML = weight*453.592; 
-//                             lbsOutput.innerHTML = " ";
-//                             ozOutput.innerHTML = weight*16;
-//                             kgOutput.innerHTML = weight*0.453592;
-//                             event.stopPropagation(); 
-//                             } else 
-//                                 if (weightType.value === "Ounces") {
-//                                     output.style.visibility = 'visible';
-//                                     gramsOutput.innerHTML = weight*28.3495; 
-//                                     lbsOutput.innerHTML = weight*0.0625;
-//                                     ozOutput.innerHTML =  " ";
-//                                     kgOutput.innerHTML = weight*0.0283495;
-//                                     event.stopPropagation();
-//                                 }
-// };
-
-// second version of calculation function; fixes NaN output issue
-// const calculateTwo = () => {
-//       let weight = input.value;
-//         if (input.value === "") {
-//               output.style.visibility = 'hidden';
-//           } else
-//             if (weightType.value === "Kilograms") {
-//                       output.style.visibility = 'visible';
-//                       gramsOutput.innerHTML = weight*1000; 
-//                       lbsOutput.innerHTML = weight*2.20462;
-//                       ozOutput.innerHTML = weight*35.274;
-//                       kgOutput.innerHTML = weight*1;
-//                       } else 
-//                           if (weightType.value === "Grams") {
-//                               output.style.visibility = 'visible';
-//                               gramsOutput.innerHTML = weight*1; 
-//                               lbsOutput.innerHTML = weight*0.00220462;
-//                               ozOutput.innerHTML = weight*0.035274;
-//                               kgOutput.innerHTML = weight*0.001;
-//                               } else 
-//                                   if (weightType.value === "Pounds") {
-//                                       output.style.visibility = 'visible';
-//                                       gramsOutput.innerHTML = weight*453.592; 
-//                                       lbsOutput.innerHTML = weight*1;
-//                                       ozOutput.innerHTML = weight*16;
-//                                       kgOutput.innerHTML = weight*0.453592;
-//                                       } else 
-//                                           if (weightType.value === "Ounces") {
-//                                               output.style.visibility = 'visible';
-//                                               gramsOutput.innerHTML = weight*28.3495; 
-//                                               lbsOutput.innerHTML = weight*0.0625;
-//                                               ozOutput.innerHTML =  weight*1;
-//                                               kgOutput.innerHTML = weight*0.0283495;
-//                                           }
-//   };
+unitSelectorEl.addEventListener("change", changePlaceholder);
+weightTypeEl.addEventListener("click", conversionsOutput);
+inputEl.addEventListener("input", conversionsOutput);
